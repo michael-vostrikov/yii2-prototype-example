@@ -105,4 +105,19 @@ class OrderSearch extends Model
 
         return $dataProvider;
     }
+
+    /**
+     * Return true if any filter is set
+     * @return bool
+     */
+    public function hasFilters()
+    {
+        foreach ($this->getAttributes() as $field => $value) {
+            if (!empty($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

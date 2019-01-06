@@ -9,11 +9,29 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
+
+$filterPanelExpanded = $searchModel->hasFilters();
 ?>
 <div class="order-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_search', ['model' => $searchModel]) ?>
+
+    <div class="panel-group" id="filter" role="tablist">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="filter-header">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#filter" href="#filter-body" aria-expanded="<?= ($filterPanelExpanded ? 'true' : 'false') ?>" aria-controls="filterBody">
+                    <?= Yii::t('app', 'Filter') ?>
+                    </a>
+                </h4>
+            </div>
+            <div id="filter-body" class="panel-collapse collapse <?= ($filterPanelExpanded ? 'in' : 'out') ?>" role="tabpanel" aria-labelledby="filter-header">
+                <div class="panel-body">
+                    <?= $this->render('_search', ['model' => $searchModel]) ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
