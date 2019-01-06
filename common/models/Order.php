@@ -56,6 +56,9 @@ class Order extends \yii\db\ActiveRecord
             'message' => Yii::t('app', 'Message'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+
+            'user.username' => Yii::t('app', 'User'),
+            'currency.name' => Yii::t('app', 'Currency'),
         ];
     }
 
