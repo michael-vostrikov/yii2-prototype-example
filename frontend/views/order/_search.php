@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use common\models\Currency;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\OrderSearch */
@@ -13,25 +15,50 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'successCssClass' => false,
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
 
-    <?= $form->field($model, 'user_id') ?>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'id') ?>
+        </div>
 
-    <?= $form->field($model, 'currency_id') ?>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'username') ?>
+        </div>
 
-    <?= $form->field($model, 'amount') ?>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'created_at_from') ?>
+        </div>
 
-    <?= $form->field($model, 'message') ?>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'created_at_to') ?>
+        </div>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'message') ?>
+        </div>
 
-    <?php // echo $form->field($model, 'updated_at') ?>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'currency_id')->dropdownList(
+                ArrayHelper::map(Currency::find()->all(), 'id', 'name'),
+                ['prompt' => Yii::t('app', '[ select ]')]
+            ) ?>
+        </div>
+
+        <div class="col-sm-3">
+            <?= $form->field($model, 'amount_from') ?>
+        </div>
+
+        <div class="col-sm-3">
+            <?= $form->field($model, 'amount_to') ?>
+        </div>
+
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
